@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Portfolio Muhammad Adzikra Putra Zen — Mahasiswa D4 Sistem Informasi Bisnis Politeknik Negeri Malang, Flutter & Web Developer.">
+<title>Muhammad Adzikra — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --accent: #2563EB;
+    --accent-light: #EFF6FF;
+    --accent-border: #BFDBFE;
+    --text: #111827;
+    --text-muted: #6B7280;
+    --border: #E5E7EB;
+    --bg: #FFFFFF;
+    --card: #F9FAFB;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.6;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ── NAV ── */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+  }
+  .nav-logo {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 1.75rem; }
+  .nav-links a {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); text-decoration: none; }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 740px; margin: 0 auto; padding: 0 2rem; }
+
+  /* ── HERO ── */
+  .hero { padding: 4.5rem 0 3rem; }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--accent-light);
+    color: var(--accent);
+    border: 1px solid var(--accent-border);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: blink 2s infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  .hero h1 {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(2rem, 5vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero p {
+    font-size: 1rem;
+    color: var(--text-muted);
+    max-width: 560px;
+    margin-bottom: 2rem;
+    line-height: 1.75;
+  }
+  .hero-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.2s;
+  }
+  .btn-primary:hover { background: #1D4ED8; text-decoration: none; color: #fff; }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--text);
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: 1.5px solid var(--border);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+
+  /* ── STATS ── */
+  .stats {
+    display: flex;
+    gap: 2.5rem;
+    padding: 0 0 3rem;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+  .stat-num {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    display: block;
+  }
+  .stat-label { font-size: 0.8rem; color: var(--text-muted); }
+
+  /* ── SECTIONS ── */
+  .section { padding: 3.5rem 0; border-bottom: 1px solid var(--border); }
+  .section:last-of-type { border-bottom: none; }
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1.75rem;
+  }
+  .section-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+  .section-link { font-size: 0.8rem; color: var(--accent); }
+
+  /* ── PROJECT CARDS ── */
+  .projects-grid { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .project-card {
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .project-card:hover {
+    border-color: var(--accent-border);
+    box-shadow: 0 6px 24px rgba(37,99,235,0.09);
+  }
+
+  /* Screenshot gallery */
+  .screenshot-gallery {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 1.5rem 1.5rem 1.25rem;
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .screenshot-gallery::-webkit-scrollbar { height: 4px; }
+  .screenshot-gallery::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 2px; }
+
+  .gallery-item { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .gallery-label { font-size: 0.7rem; color: #9CA3AF; white-space: nowrap; }
+
+  /* Phone frame */
+  .phone-frame {
+    flex-shrink: 0;
+    width: 115px;
+    background: #111;
+    border-radius: 22px;
+    padding: 8px 6px;
+    border: 2px solid #2a2a2a;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  }
+  .phone-notch {
+    width: 36px; height: 6px;
+    background: #111;
+    border-radius: 3px;
+    margin: 0 auto 5px;
+  }
+  .phone-screen { border-radius: 15px; overflow: hidden; }
+  .phone-screen img { width: 100%; display: block; }
+
+  /* Browser frame */
+  .browser-frame {
+    flex-shrink: 0;
+    width: 260px;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #D1D5DB;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+  }
+  .browser-bar {
+    background: #F3F4F6;
+    padding: 7px 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border-bottom: 1px solid var(--border);
+  }
+  .browser-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .browser-url {
+    background: #fff;
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    flex: 1;
+    border: 1px solid var(--border);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: monospace;
+  }
+  .browser-screen img { width: 100%; display: block; max-height: 155px; object-fit: cover; object-position: top; }
+
+  /* Project info */
+  .project-info { padding: 1.25rem 1.5rem; }
+  .project-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 0.5rem;
+  }
+  .project-name { font-weight: 600; font-size: 1rem; }
+  .project-links { display: flex; gap: 8px; flex-shrink: 0; }
+  .project-links a {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    padding: 3px 10px;
+    border-radius: 6px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .project-links a:hover { color: var(--accent); border-color: var(--accent-border); text-decoration: none; }
+  .project-desc { font-size: 0.875rem; color: var(--text-muted); margin-bottom: 0.85rem; line-height: 1.65; }
+
+  /* Tags */
+  .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .tag {
+    background: #F3F4F6;
+    color: #374151;
+    font-size: 0.75rem;
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-weight: 500;
+  }
+  .tag.flutter { background: #E0F2FE; color: #0369A1; }
+  .tag.dart    { background: #E0F2FE; color: #0369A1; }
+  .tag.html    { background: #FFF7ED; color: #C2410C; }
+  .tag.css     { background: #F0FDF4; color: #166534; }
+  .tag.js      { background: #FEFCE8; color: #92400E; }
+  .tag.php     { background: #FAF5FF; color: #7E22CE; }
+
+  /* No-image project card */
+  .project-simple { padding: 1.25rem 1.5rem; }
+  .project-preview {
+    background: var(--card);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border);
+  }
+  .project-preview-icon { font-size: 2rem; flex-shrink: 0; }
+  .project-preview-text .name { font-size: 0.875rem; font-weight: 600; color: var(--text); }
+  .project-preview-text .desc { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
+
+  /* ── SKILLS ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  .skill-group {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+  }
+  .skill-group-title {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.75rem;
+  }
+  .skill-list { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  /* ── ABOUT ── */
+  .about-card {
+    background: var(--accent-light);
+    border: 1px solid var(--accent-border);
+    border-radius: 14px;
+    padding: 1.75rem;
+  }
+  .about-card p { font-size: 0.925rem; color: #1E3A5F; line-height: 1.85; }
+
+  /* ── CONTACT ── */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .contact-item {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: border-color 0.2s;
+  }
+  .contact-item:hover { border-color: var(--accent-border); }
+  .contact-icon {
+    width: 38px; height: 38px;
+    background: var(--accent-light);
+    border-radius: 9px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+  .contact-label { font-size: 0.72rem; color: var(--text-muted); font-weight: 500; margin-bottom: 2px; }
+  .contact-value { font-size: 0.875rem; font-weight: 500; color: var(--text); }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 2.5rem 2rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    nav { padding: 0.875rem 1.25rem; }
+    .container { padding: 0 1.25rem; }
+    .hero h1 { font-size: 1.85rem; }
+    .stats { gap: 1.5rem; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .browser-frame { width: 220px; }
+    .phone-frame { width: 100px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Adzikra.</a>
+  <div class="nav-links">
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="container">
+  <div class="hero">
+    <div class="hero-tag">Open to opportunities</div>
+    <h1>Hi, I'm <span>Muhammad Adzikra</span> 👋</h1>
+    <p>Mahasiswa D4 Sistem Informasi Bisnis di Politeknik Negeri Malang. Saya membangun aplikasi mobile dan website — dari landing page hingga finance tracker. Antusias dalam software development dan selalu ingin belajar hal baru.</p>
+    <div class="hero-actions">
+      <a href="https://github.com/adzikraaa" class="btn-primary" target="_blank" rel="noopener">⬡ GitHub</a>
+      <a href="https://www.linkedin.com/in/muhammad-adzikra-46746934b/" class="btn-secondary" target="_blank" rel="noopener">in LinkedIn</a>
+      <a href="mailto:dzikra.zen@gmail.com" class="btn-secondary">✉ Email</a>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat"><span class="stat-num">3+</span><span class="stat-label">Projects</span></div>
+    <div class="stat"><span class="stat-num">2</span><span class="stat-label">Tech stacks</span></div>
+    <div class="stat"><span class="stat-num">2025</span><span class="stat-label">Mulai coding</span></div>
+    <div class="stat"><span class="stat-num">Sem. 4</span><span class="stat-label">Politeknik Negeri Malang</span></div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<div class="container">
+  <div class="section" id="projects">
+    <div class="section-header">
+      <span class="section-title">Projects</span>
+      <a href="https://github.com/adzikraaa" class="section-link" target="_blank" rel="noopener">Lihat semua →</a>
+    </div>
+    <div class="projects-grid">
+
+      <!-- BizPrice App -->
+      <div class="project-card">
+        <!-- iPhone Mockup -->
+        <div style="background:linear-gradient(135deg,#F8FAFF 0%,#EFF4FF 100%);padding:2rem 1.5rem 1.5rem;border-bottom:1px solid var(--border);overflow:hidden;">
+          <svg viewBox="0 0 620 430" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:580px;display:block;margin:0 auto" role="img" aria-label="BizPrice app screenshots in iPhone mockup">
+            <defs>
+              <clipPath id="sc1"><rect x="55" y="32" width="158" height="344" rx="24"/></clipPath>
+              <clipPath id="sc2"><rect x="248" y="32" width="158" height="344" rx="24"/></clipPath>
+              <linearGradient id="bodyG1" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#A8A8A8"/>
+                <stop offset="6%" stop-color="#E2E2E2"/>
+                <stop offset="94%" stop-color="#E2E2E2"/>
+                <stop offset="100%" stop-color="#A8A8A8"/>
+              </linearGradient>
+              <linearGradient id="bodyG2" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#A8A8A8"/>
+                <stop offset="6%" stop-color="#E2E2E2"/>
+                <stop offset="94%" stop-color="#E2E2E2"/>
+                <stop offset="100%" stop-color="#A8A8A8"/>
+              </linearGradient>
+              <linearGradient id="bezelG" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#1c1c1e"/>
+                <stop offset="100%" stop-color="#0a0a0a"/>
+              </linearGradient>
+              <linearGradient id="glossG" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#fff" stop-opacity="0.10"/>
+                <stop offset="60%" stop-color="#fff" stop-opacity="0"/>
+              </linearGradient>
+              <linearGradient id="btnG" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#B0B0B0"/>
+                <stop offset="50%" stop-color="#D8D8D8"/>
+                <stop offset="100%" stop-color="#A8A8A8"/>
+              </linearGradient>
+              <filter id="ph-shadow" x="-25%" y="-10%" width="150%" height="130%">
+                <feDropShadow dx="0" dy="10" stdDeviation="18" flood-color="#000" flood-opacity="0.20"/>
+              </filter>
+            </defs>
+
+            <!-- ── PHONE LEFT ── -->
+            <g filter="url(#ph-shadow)">
+              <rect x="45" y="16" width="178" height="376" rx="36" fill="url(#bodyG1)"/>
+              <rect x="50" y="21" width="168" height="366" rx="32" fill="url(#bezelG)"/>
+              <image href="assets/Home.png" x="55" y="32" width="158" height="344" clip-path="url(#sc1)" preserveAspectRatio="xMidYMin slice"/>
+              <rect x="55" y="32" width="158" height="344" rx="24" fill="url(#glossG)"/>
+              <!-- Dynamic Island -->
+              <rect x="103" y="43" width="62" height="14" rx="7" fill="#000" opacity="0.95"/>
+              <circle cx="152" cy="50" r="3.5" fill="#111"/>
+              <circle cx="152" cy="50" r="1.8" fill="#0a0a0a"/>
+              <!-- Home bar -->
+              <rect x="111" y="364" width="46" height="4" rx="2" fill="#fff" opacity="0.25"/>
+              <!-- Vol buttons -->
+              <rect x="42" y="80" width="5" height="26" rx="2.5" fill="url(#btnG)"/>
+              <rect x="42" y="114" width="5" height="38" rx="2.5" fill="url(#btnG)"/>
+              <rect x="42" y="160" width="5" height="38" rx="2.5" fill="url(#btnG)"/>
+              <!-- Silent -->
+              <rect x="42" y="56" width="5" height="16" rx="2.5" fill="url(#btnG)"/>
+              <!-- Power -->
+              <rect x="222" y="112" width="5" height="58" rx="2.5" fill="url(#btnG)"/>
+              <!-- Edge shine -->
+              <rect x="55" y="32" width="158" height="344" rx="24" fill="none" stroke="#fff" stroke-width="0.5" opacity="0.10"/>
+            </g>
+            <text x="134" y="410" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#6B7280" font-weight="500">Home</text>
+
+            <!-- ── PHONE RIGHT ── -->
+            <g filter="url(#ph-shadow)">
+              <rect x="238" y="16" width="178" height="376" rx="36" fill="url(#bodyG2)"/>
+              <rect x="243" y="21" width="168" height="366" rx="32" fill="url(#bezelG)"/>
+              <image href="assets/Hasil_Analisis.png" x="248" y="32" width="158" height="344" clip-path="url(#sc2)" preserveAspectRatio="xMidYMin slice"/>
+              <rect x="248" y="32" width="158" height="344" rx="24" fill="url(#glossG)"/>
+              <!-- Dynamic Island -->
+              <rect x="296" y="43" width="62" height="14" rx="7" fill="#000" opacity="0.95"/>
+              <circle cx="345" cy="50" r="3.5" fill="#111"/>
+              <circle cx="345" cy="50" r="1.8" fill="#0a0a0a"/>
+              <!-- Home bar -->
+              <rect x="304" y="364" width="46" height="4" rx="2" fill="#fff" opacity="0.25"/>
+              <!-- Vol buttons -->
+              <rect x="235" y="80" width="5" height="26" rx="2.5" fill="url(#btnG)"/>
+              <rect x="235" y="114" width="5" height="38" rx="2.5" fill="url(#btnG)"/>
+              <rect x="235" y="160" width="5" height="38" rx="2.5" fill="url(#btnG)"/>
+              <rect x="235" y="56" width="5" height="16" rx="2.5" fill="url(#btnG)"/>
+              <!-- Power -->
+              <rect x="415" y="112" width="5" height="58" rx="2.5" fill="url(#btnG)"/>
+              <rect x="248" y="32" width="158" height="344" rx="24" fill="none" stroke="#fff" stroke-width="0.5" opacity="0.10"/>
+            </g>
+            <text x="327" y="410" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#6B7280" font-weight="500">Hasil Analisis</text>
+
+            <!-- ── FEATURE BADGES ── -->
+            <rect x="440" y="68" width="148" height="34" rx="10" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1"/>
+            <text x="514" y="81" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#1D4ED8" font-weight="600">💰 Kalkulator HPP</text>
+            <text x="514" y="95" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#3B82F6">&amp; BEP Otomatis</text>
+
+            <rect x="440" y="114" width="148" height="34" rx="10" fill="#F0FDF4" stroke="#BBF7D0" stroke-width="1"/>
+            <text x="514" y="127" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#166534" font-weight="600">🎯 Target Tabungan</text>
+            <text x="514" y="141" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#16A34A">dengan progress tracker</text>
+
+            <rect x="440" y="160" width="148" height="34" rx="10" fill="#FFF7ED" stroke="#FED7AA" stroke-width="1"/>
+            <text x="514" y="173" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#C2410C" font-weight="600">📊 Insight Bisnis</text>
+            <text x="514" y="187" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#EA580C">analisis visual realtime</text>
+
+            <rect x="440" y="206" width="148" height="34" rx="10" fill="#FAF5FF" stroke="#E9D5FF" stroke-width="1"/>
+            <text x="514" y="219" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#7E22CE" font-weight="600">🎮 Simulasi Harga</text>
+            <text x="514" y="233" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#9333EA">slider interaktif</text>
+
+            <!-- Connector lines + dots -->
+            <line x1="420" y1="85" x2="438" y2="85" stroke="#BFDBFE" stroke-width="1"/>
+            <line x1="420" y1="131" x2="438" y2="131" stroke="#BBF7D0" stroke-width="1"/>
+            <line x1="420" y1="177" x2="438" y2="177" stroke="#FED7AA" stroke-width="1"/>
+            <line x1="420" y1="223" x2="438" y2="223" stroke="#E9D5FF" stroke-width="1"/>
+            <circle cx="438" cy="85" r="3" fill="#BFDBFE"/>
+            <circle cx="438" cy="131" r="3" fill="#BBF7D0"/>
+            <circle cx="438" cy="177" r="3" fill="#FED7AA"/>
+            <circle cx="438" cy="223" r="3" fill="#E9D5FF"/>
+
+            <!-- Tech pills -->
+            <rect x="440" y="290" width="54" height="22" rx="11" fill="#E0F2FE"/>
+            <text x="467" y="305" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#0369A1" font-weight="600">Flutter</text>
+            <rect x="500" y="290" width="42" height="22" rx="11" fill="#E0F2FE"/>
+            <text x="521" y="305" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#0369A1" font-weight="600">Dart</text>
+            <rect x="440" y="318" width="102" height="22" rx="11" fill="#F3F4F6"/>
+            <text x="491" y="333" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#374151" font-weight="500">Cross-platform</text>
+          </svg>
+        </div>
+        <div class="project-info">
+          <div class="project-top">
+            <span class="project-name">BizPrice — Finance Tracker App</span>
+            <div class="project-links">
+              <a href="https://github.com/adzikraaa/PBL-FinanceTracker-Kelompok4" target="_blank" rel="noopener">↗ GitHub</a>
+            </div>
+          </div>
+          <p class="project-desc">Aplikasi cross-platform untuk UMKM Indonesia — menghitung HPP, BEP, dan mengelola keuangan bisnis. Dibangun secara kolaboratif dengan Git branching workflow (develop + feature branches).</p>
+          <div class="tags">
+            <span class="tag flutter">Flutter</span>
+            <span class="tag dart">Dart</span>
+            <span class="tag">Cross-platform</span>
+            <span class="tag">Git Collaboration</span>
+            <span class="tag">PBL Semester 4</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lab SE -->
+      <div class="project-card">
+        <div class="screenshot-gallery">
+          <div class="gallery-item">
+            <div class="browser-frame">
+              <div class="browser-bar">
+                <div class="browser-dot" style="background:#FF5F57"></div>
+                <div class="browser-dot" style="background:#FFBD2E"></div>
+                <div class="browser-dot" style="background:#28C840"></div>
+                <span class="browser-url">lab-se.polinema.ac.id</span>
+              </div>
+              <div class="browser-screen">
+                <img src="assets/landingpage.png" alt="Lab SE landing page" loading="lazy" />
+              </div>
+            </div>
+            <span class="gallery-label">Landing Page</span>
+          </div>
+          <div class="gallery-item">
+            <div class="browser-frame">
+              <div class="browser-bar">
+                <div class="browser-dot" style="background:#FF5F57"></div>
+                <div class="browser-dot" style="background:#FFBD2E"></div>
+                <div class="browser-dot" style="background:#28C840"></div>
+                <span class="browser-url">lab-se.polinema.ac.id/admin</span>
+              </div>
+              <div class="browser-screen">
+                <img src="assets/Dashboard_admin.png" alt="Dashboard admin Lab SE" loading="lazy" />
+              </div>
+            </div>
+            <span class="gallery-label">Dashboard Admin</span>
+          </div>
+        </div>
+        <div class="project-info">
+          <div class="project-top">
+            <span class="project-name">Website Lab Software Engineering</span>
+            <div class="project-links">
+              <a href="https://github.com/NaufalAlifAdjani/PBL-SE" target="_blank" rel="noopener">↗ GitHub</a>
+            </div>
+          </div>
+          <p class="project-desc">Website profil Laboratorium Software Engineering POLINEMA dengan arsitektur MVC. Fitur: blog, portofolio, profil personil, rekrutmen, dan panel admin dengan manajemen konten lengkap.</p>
+          <div class="tags">
+            <span class="tag php">PHP</span>
+            <span class="tag css">CSS</span>
+            <span class="tag js">JavaScript</span>
+            <span class="tag">MVC</span>
+            <span class="tag">MySQL</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- BizPrice Landing Page -->
+      <div class="project-card">
+        <div class="project-simple">
+          <div class="project-preview">
+            <div class="project-preview-icon">🌐</div>
+            <div class="project-preview-text">
+              <div class="name">BizPrice Landing Page</div>
+              <div class="desc">Dark green theme · Particle canvas · Scroll reveal · Responsive</div>
+            </div>
+            <div class="project-links" style="margin-left:auto">
+              <a href="https://github.com/adzikraaa/weblandingpagePBL-Flutter" target="_blank" rel="noopener">↗ GitHub</a>
+            </div>
+          </div>
+          <p class="project-desc">Landing page promosi aplikasi BizPrice dengan animasi particle canvas, counter stats, glassmorphism, dan scroll reveal. Fully responsive dari mobile hingga desktop tanpa framework tambahan.</p>
+          <div class="tags">
+            <span class="tag html">HTML</span>
+            <span class="tag css">CSS</span>
+            <span class="tag js">JavaScript</span>
+            <span class="tag">Vanilla JS</span>
+            <span class="tag">Responsive</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<div class="container">
+  <div class="section" id="skills">
+    <div class="section-header">
+      <span class="section-title">Skills</span>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-title">Frontend</div>
+        <div class="skill-list">
+          <span class="tag html">HTML5</span>
+          <span class="tag css">CSS3</span>
+          <span class="tag js">JavaScript</span>
+          <span class="tag">Responsive Design</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Mobile</div>
+        <div class="skill-list">
+          <span class="tag flutter">Flutter</span>
+          <span class="tag dart">Dart</span>
+          <span class="tag">Cross-platform</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Backend & DB</div>
+        <div class="skill-list">
+          <span class="tag php">PHP</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">MVC Pattern</span>
+          <span class="tag">PostgreSQL</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Tools</div>
+        <div class="skill-list">
+          <span class="tag">Git</span>
+          <span class="tag">GitHub</span>
+          <span class="tag">Figma</span>
+          <span class="tag">VS Code</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Data</div>
+        <div class="skill-list">
+          <span class="tag">Pentaho Spoon</span>
+          <span class="tag">ETL</span>
+          <span class="tag">Data Warehouse</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Soft Skills</div>
+        <div class="skill-list">
+          <span class="tag">Team Collaboration</span>
+          <span class="tag">Content Creation</span>
+          <span class="tag">Communication</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="container">
+  <div class="section" id="about">
+    <div class="section-header">
+      <span class="section-title">About me</span>
+    </div>
+    <div class="about-card">
+      <p>Saya Adzikra, mahasiswa D4 Sistem Informasi Bisnis di Politeknik Negeri Malang (angkatan 2024). Aktif membangun project berbasis tim menggunakan Flutter, HTML/CSS/JS, dan PHP. Saya percaya teknologi yang baik harus bisa menjawab kebutuhan nyata — makanya saya suka bikin aplikasi yang punya tujuan jelas, bukan sekadar latihan.<br><br>Di luar coding, saya punya background organisasi yang kuat (Sekretaris OSIS, ALBAMA) yang mengajarkan cara bekerja dalam tim, komunikasi, dan tanggung jawab. Sedang aktif belajar dan mencari peluang untuk berkontribusi di dunia tech.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="container">
+  <div class="section" id="contact">
+    <div class="section-header">
+      <span class="section-title">Get in touch</span>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <div class="contact-icon">✉</div>
+        <div>
+          <div class="contact-label">Email</div>
+          <a href="mailto:dzikra.zen@gmail.com" class="contact-value">dzikra.zen@gmail.com</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div>
+          <div class="contact-label">WhatsApp</div>
+          <a href="https://wa.me/6285648967475" class="contact-value" target="_blank" rel="noopener">085648967475</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">⬡</div>
+        <div>
+          <div class="contact-label">GitHub</div>
+          <a href="https://github.com/adzikraaa" class="contact-value" target="_blank" rel="noopener">github.com/adzikraaa</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">in</div>
+        <div>
+          <div class="contact-label">LinkedIn</div>
+          <a href="https://www.linkedin.com/in/muhammad-adzikra-46746934b/" class="contact-value" target="_blank" rel="noopener">muhammad-adzikra</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  © 2026 Muhammad Adzikra Putra Zen &nbsp;·&nbsp; Dibuat dengan semangat belajar 🙏
+</footer>
+
+</body>
+</html>
