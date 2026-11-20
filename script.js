@@ -195,3 +195,47 @@ if (repoGrid) {
     window.addEventListener("resize", () => ScrollTrigger.refresh(), { passive: true });
   }
 })();
+
+
+// Professional motion polish: staggered section entrances and resilient image states.
+(() => {
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduced || !window.gsap || !window.ScrollTrigger) return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Stagger cards and capability tiles as cohesive groups.
+  [".expertise-grid", ".repo-grid"].forEach((selector) => {
+    const group = document.querySelector(selector);
+    if (!group) return;
+    const items = group.children;
+    gsap.from(items, {
+      y: 24, opacity: 0, duration: 0.65, stagger: 0.09, ease: "power2.out",
+      scrollTrigger: { trigger: group, start: "top 82%", once: true }
+    });
+  });
+
+  // Section titles reveal with a small vertical movement, avoiding split-text dependencies.
+  document.querySelectorAll(".section-heading h2, .about-label h2").forEach((heading) => {
+    gsap.from(heading, {
+      y: 22, opacity: 0, duration: 0.75, ease: "power3.out",
+      scrollTrigger: { trigger: heading, start: "top 88%", once: true }
+    });
+  });
+
+  // Make image placeholders robust when an image path is not present yet.
+  document.querySelectorAll(".gallery-shot img").forEach((img) => {
+    const figure = img.closest(".gallery-shot");
+    const sync = () => {
+      if (img.naturalWidth > 0) {
+        img.classList.add("is-loaded");
+        figure?.classList.add("has-image");
+      } else {
+        img.classList.remove("is-loaded");
+        figure?.classList.remove("has-image");
+      }
+    };
+    img.addEventListener("load", sync);
+    img.addEventListener("error", sync);
+    if (img.complete) sync();
+  });
+})();
