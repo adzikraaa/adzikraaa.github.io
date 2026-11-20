@@ -98,10 +98,17 @@ if (repoGrid) {
   ].filter(Boolean) : [];
   heroItems.forEach((item) => item.setAttribute("data-hero-item", ""));
   if (!reduceMotion && window.gsap) {
-    gsap.to(heroItems, { y: 0, opacity: 1, duration: 0.85, stagger: 0.12, ease: "power3.out", delay: 0.12 });
-    gsap.to("[data-hero-portrait]", { opacity: 1, clipPath: "inset(0% 0% 0% 0% round 46% 46% 18px 18px)", duration: 1.15, ease: "power3.inOut", delay: 0.42 });
+    const titleLines = gsap.utils.toArray(".hero-line > span");
+    gsap.set(titleLines, { yPercent: 115, rotate: 1.5 });
+    const intro = gsap.timeline({ defaults: { ease: "power4.out" } });
+    intro.to(heroItems.filter((item) => !item.classList.contains("hero-title")), {
+      y: 0, opacity: 1, duration: 0.8, stagger: 0.1
+    }, 0.12);
+    intro.to(titleLines, { yPercent: 0, rotate: 0, duration: 1.05, stagger: 0.13 }, 0.28);
+    gsap.to("[data-hero-portrait]", { opacity: 1, clipPath: "inset(0% 0% 0% 0% round 46% 46% 18px 18px)", duration: 1.25, ease: "power4.inOut", delay: 0.48 });
   } else {
     heroItems.forEach((item) => { item.style.opacity = "1"; item.style.transform = "none"; });
+    document.querySelectorAll(".hero-line > span").forEach((line) => { line.style.transform = "none"; });
     const portrait = document.querySelector("[data-hero-portrait]");
     if (portrait) { portrait.style.opacity = "1"; portrait.style.clipPath = "none"; }
   }
@@ -184,8 +191,17 @@ if (repoGrid) {
     };
     requestAnimationFrame(follow);
     document.querySelectorAll("a,button,.gallery-shot").forEach((target) => {
-      target.addEventListener("pointerenter", () => cursorRing.classList.add("is-hover"));
-      target.addEventListener("pointerleave", () => cursorRing.classList.remove("is-hover"));
+      target.addEventListener("pointerenter", () => {
+        cursorRing.classList.add("is-hover");
+        if (target.closest(".project-card")) {
+          cursorRing.classList.add("is-project");
+          cursorRing.textContent = "VIEW\nPROJECT";
+        }
+      });
+      target.addEventListener("pointerleave", () => {
+        cursorRing.classList.remove("is-hover", "is-project");
+        cursorRing.textContent = "";
+      });
     });
   }
 
@@ -237,5 +253,31 @@ if (repoGrid) {
     img.addEventListener("load", sync);
     img.addEventListener("error", sync);
     if (img.complete) sync();
+  });
+})();
+
+
+// Cinematic scroll accents: clipped image entrances and restrained depth drift.
+(() => {
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduced || !window.gsap || !window.ScrollTrigger) return;
+  gsap.utils.toArray(".project-visual").forEach((visual) => {
+    gsap.fromTo(visual, { clipPath: "inset(8% 5% 8% 5% round 18px)" }, {
+      clipPath: "inset(0% 0% 0% 0% round 0px)",
+      duration: 1.05, ease: "power3.out",
+      scrollTrigger: { trigger: visual, start: "top 88%", once: true }
+    });
+  });
+  gsap.utils.toArray(".bizprice-orbit").forEach((orbit) => {
+    gsap.to(orbit, {
+      rotation: 360, duration: 42, ease: "none", repeat: -1,
+      transformOrigin: "50% 50%"
+    });
+  });
+  gsap.utils.toArray(".motion-marquee").forEach((marquee) => {
+    gsap.from(marquee, {
+      opacity: 0, y: 28, duration: .8, ease: "power3.out",
+      scrollTrigger: { trigger: marquee, start: "top 92%", once: true }
+    });
   });
 })();
