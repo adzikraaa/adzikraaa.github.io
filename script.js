@@ -101,7 +101,7 @@ if (repoGrid) {
     const titleLines = gsap.utils.toArray(".hero-line > span");
     gsap.set(titleLines, { yPercent: 115, rotate: 1.5 });
     const intro = gsap.timeline({ defaults: { ease: "power4.out" } });
-    intro.to(heroItems.filter((item) => !item.classList.contains("hero-title")), {
+    intro.to(heroItems, {
       y: 0, opacity: 1, duration: 0.8, stagger: 0.1
     }, 0.12);
     intro.to(titleLines, { yPercent: 0, rotate: 0, duration: 1.05, stagger: 0.13 }, 0.28);
