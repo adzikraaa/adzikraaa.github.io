@@ -15,6 +15,8 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="scroll-progress" aria-hidden="true"><span></span></div>
+  <div class="cursor-dot" aria-hidden="true"></div><div class="cursor-ring" aria-hidden="true"></div>
   <header class="site-header">
     <nav class="nav shell" aria-label="Main navigation">
       <a class="brand" href="#top" aria-label="Adzikra home">adzikra<span>.</span></a>
@@ -29,9 +31,9 @@
 
   <main id="top">
     <section class="hero shell">
-      <div class="hero-copy">
+      <div class="hero-copy" data-hero-copy>
         <p class="eyebrow"><span class="status-dot"></span> FULL-STACK SOFTWARE ENGINEER <span class="eyebrow-divider">/</span> MALANG, INDONESIA</p>
-        <h1>Building software<br>that solves <em>real problems.</em></h1>
+        <h1 class="hero-title">Building software<br>that solves <em>real problems.</em></h1>
         <p class="hero-lead">I build practical web applications and backend systems — connecting thoughtful interfaces, reliable logic, and well-structured data.</p>
         <div class="hero-actions">
           <a class="button button-primary" href="#work">Explore projects <span aria-hidden="true">→</span></a>
@@ -39,7 +41,7 @@
         </div>
         <div class="hero-note"><span class="note-line"></span><span>Business Information Systems · POLINEMA · Class of 2024</span></div>
       </div>
-      <div class="hero-portrait">
+      <div class="hero-portrait" data-hero-portrait>
         <div class="portrait-frame">
           <img src="assets/profile.jpg" alt="Portrait of Adzikra" class="portrait-image">
           <div class="portrait-fallback"><span>YOUR PHOTO</span><small>Replace assets/profile.jpg</small></div>
@@ -60,7 +62,7 @@
         <p class="section-intro">A selection of systems and products I have contributed to or built independently.</p>
       </div>
 
-      <div class="project-grid">
+      <div class="projects-viewport"><div class="project-grid projects-track">
         <article class="project-card project-featured">
           <div class="project-visual visual-simpbl">
             <div class="visual-top"><span class="visual-brand"><b class="mini-mark">S</b> SIM-PBL</span><span class="visual-label">PROJECT SCREENSHOTS</span></div>
@@ -133,6 +135,7 @@
           </div>
         </article>
       </div>
+      </div></div>
       <p class="project-footnote">Project previews are custom visual representations, not product screenshots. Detailed case studies and verified product captures are the next portfolio iteration.</p>
     </section>
 
@@ -177,6 +180,9 @@
   </main>
 
   <footer class="site-footer shell"><a class="brand" href="#top">adzikra<span>.</span></a><p>Designed and built with care · © <span id="year"></span> Adzikra</p><a href="#top">Back to top ↑</a></footer>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.17/dist/lenis.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
