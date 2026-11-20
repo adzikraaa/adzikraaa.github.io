@@ -174,7 +174,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 .project-card .project-info{position:relative}
 .project-card .project-info:before{content:"";position:absolute;left:24px;right:24px;top:0;height:1px;background:linear-gradient(90deg,var(--accent),transparent);transform:scaleX(0);transform-origin:left;transition:transform .55s var(--motion-ease)}
 .project-card:hover .project-info:before{transform:scaleX(1)}
-.cursor-ring.is-project{width:86px;height:86px;border:0;background:var(--accent);color:#fff;display:grid;place-items:center;border-radius:50%;font:500 .56rem var(--mono);letter-spacing:.04em;text-align:center;padding:12px}
+.cursor-ring.is-project{width:86px;height:86px;border:0;background:var(--accent);color:#fff;display:grid;place-items:center;border-radius:50%;font:500 .56rem var(--mono);letter-spacing:.04em;text-align:center;white-space:pre-line;padding:12px}
 .section-heading h2,.about-label h2{will-change:transform}
 .contact-section{isolation:isolate}
 .contact-section:before{content:"";position:absolute;inset:auto -8% -110% auto;width:430px;height:430px;border-radius:50%;background:radial-gradient(circle,rgba(151,126,255,.22),transparent 68%);z-index:-1;animation:heroAura 11s ease-in-out infinite alternate}
@@ -185,9 +185,9 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 }
 
 /* BizPrice: show the real app screen, not a fake CSS phone illustration. */
-.visual-bizprice{background:radial-gradient(ellipse at 52% 48%,#fafffb 0%,#e8f3eb 48%,#dcebe1 100%)}
+.visual-bizprice{min-height:350px;background:radial-gradient(ellipse at 52% 48%,#fafffb 0%,#e8f3eb 48%,#dcebe1 100%)}
 .bizprice-stage{position:absolute;inset:43px 24px 12px;display:flex;align-items:center;justify-content:center;isolation:isolate}
-.bizprice-screen{position:relative!important;z-index:2;width:clamp(142px,27%,220px);height:100%;max-height:290px;aspect-ratio:9/19.5;flex:none;margin:0!important;padding:0!important;overflow:hidden;border:1px solid rgba(40,65,48,.12);border-radius:15px;background:#fff;box-shadow:0 22px 48px rgba(35,68,46,.19),0 3px 8px rgba(35,68,46,.08);transform:rotate(-2deg) translateY(3px);transition:transform .6s var(--motion-ease),box-shadow .6s var(--motion-ease)}
+.bizprice-screen{position:relative!important;z-index:2;width:auto;height:100%;max-width:clamp(140px,25%,200px);max-height:290px;aspect-ratio:9/19.5;flex:none;margin:0!important;padding:0!important;overflow:hidden;border:1px solid rgba(40,65,48,.12);border-radius:15px;background:#fff;box-shadow:0 22px 48px rgba(35,68,46,.19),0 3px 8px rgba(35,68,46,.08);transform:rotate(-2deg) translateY(3px);transition:transform .6s var(--motion-ease),box-shadow .6s var(--motion-ease)}
 .bizprice-screen img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center top;background:#fff}
 .bizprice-screen figcaption{position:absolute;left:8px;right:8px;bottom:7px;z-index:3;font:500 .43rem var(--mono);letter-spacing:.04em;color:#718477;background:rgba(255,255,255,.9);padding:4px 5px;border-radius:4px;text-align:center}
 .bizprice-screen>span{font:500 .52rem var(--mono);letter-spacing:.04em;color:#557360;text-align:center;padding:12px;background:#f4faf5}
@@ -202,4 +202,4 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 .bizprice-orbit i{position:absolute;width:7px;height:7px;border-radius:50%;background:#8bb99a;box-shadow:0 0 0 5px rgba(139,185,154,.13)}
 .bizprice-orbit i:nth-child(1){top:12%;left:23%}.bizprice-orbit i:nth-child(2){right:9%;top:52%}.bizprice-orbit i:nth-child(3){left:17%;bottom:17%}
 @media(max-width:900px){.bizprice-stage{inset:43px 16px 12px}.bizprice-screen{width:clamp(140px,27%,205px);max-height:265px}.bizprice-side-note{left:0}.bizprice-side-index{right:0}}
-@media(max-width:640px){.bizprice-stage{inset:42px 12px 12px}.bizprice-screen{width:clamp(132px,40%,170px);max-height:205px}.bizprice-side-note{left:0;top:25%;max-width:78px}.bizprice-side-note>span{font-size:.42rem}.bizprice-side-note b{font-size:.62rem}.bizprice-side-index{font-size:.42rem}.bizprice-orbit{width:190px}}
+@media(max-width:640px){.visual-bizprice{min-height:310px}.bizprice-stage{inset:42px 12px 12px}.bizprice-screen{max-width:clamp(132px,40%,170px);max-height:255px}.bizprice-side-note{left:0;top:25%;max-width:78px}.bizprice-side-note>span{font-size:.42rem}.bizprice-side-note b{font-size:.62rem}.bizprice-side-index{font-size:.42rem}.bizprice-orbit{width:190px}}
