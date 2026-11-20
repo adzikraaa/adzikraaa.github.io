@@ -20,7 +20,7 @@ document.querySelectorAll(".portrait-image, .gallery-shot img").forEach((img) =>
 });
 
 // Reveal sections as they enter the viewport; respect reduced-motion preferences.
-const revealTargets = document.querySelectorAll(".section-heading, .project-card, .expertise-grid article, .about-copy, .contact-section, .repo-card");
+const revealTargets = document.querySelectorAll(".project-card, .about-copy, .contact-section");
 if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches && "IntersectionObserver" in window) {
   revealTargets.forEach((item) => item.classList.add("reveal"));
   const revealObserver = new IntersectionObserver((entries, observer) => {
