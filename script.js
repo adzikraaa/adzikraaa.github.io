@@ -62,3 +62,136 @@ if (repoGrid) {
     repoGrid.innerHTML = '<article class="repo-card"><span class="repo-owner">GITHUB / API</span><h3>Repositories on GitHub</h3><p>Live repository statistics are temporarily unavailable. Visit the profile to explore the source code.</p><div class="repo-meta"><a href="https://github.com/adzikraaa" target="_blank" rel="noreferrer">Open GitHub profile ↗</a></div></article>';
   });
 }
+
+
+// ===== Motion system v2 =====
+(() => {
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const finePointer = window.matchMedia("(pointer: fine)").matches;
+  const progress = document.querySelector(".scroll-progress span");
+  const cursorDot = document.querySelector(".cursor-dot");
+  const cursorRing = document.querySelector(".cursor-ring");
+
+  // Accessible, low-friction smooth scrolling.
+  let lenis = null;
+  if (!reduceMotion && window.Lenis) {
+    lenis = new Lenis({ duration: 1.05, smoothWheel: true, wheelMultiplier: 0.9 });
+    if (window.gsap && window.ScrollTrigger) {
+      gsap.registerPlugin(ScrollTrigger);
+      lenis.on("scroll", ScrollTrigger.update);
+      gsap.ticker.add((time) => lenis.raf(time * 1000));
+      gsap.ticker.lagSmoothing(0);
+    } else {
+      const raf = (time) => { lenis.raf(time); requestAnimationFrame(raf); };
+      requestAnimationFrame(raf);
+    }
+  }
+
+  // Hero: staggered text entrance and portrait reveal.
+  const heroCopy = document.querySelector("[data-hero-copy]");
+  const heroItems = heroCopy ? [
+    heroCopy.querySelector(".eyebrow"),
+    heroCopy.querySelector(".hero-title"),
+    heroCopy.querySelector(".hero-lead"),
+    heroCopy.querySelector(".hero-actions"),
+    heroCopy.querySelector(".hero-note")
+  ].filter(Boolean) : [];
+  heroItems.forEach((item) => item.setAttribute("data-hero-item", ""));
+  if (!reduceMotion && window.gsap) {
+    gsap.to(heroItems, { y: 0, opacity: 1, duration: 0.85, stagger: 0.12, ease: "power3.out", delay: 0.12 });
+    gsap.to("[data-hero-portrait]", { opacity: 1, clipPath: "inset(0% 0% 0% 0% round 46% 46% 18px 18px)", duration: 1.15, ease: "power3.inOut", delay: 0.42 });
+  } else {
+    heroItems.forEach((item) => { item.style.opacity = "1"; item.style.transform = "none"; });
+    const portrait = document.querySelector("[data-hero-portrait]");
+    if (portrait) { portrait.style.opacity = "1"; portrait.style.clipPath = "none"; }
+  }
+
+  // Scroll progress indicator.
+  const updateProgress = () => {
+    if (!progress) return;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.transform = "scaleX(" + (max > 0 ? window.scrollY / max : 0) + ")";
+  };
+  window.addEventListener("scroll", updateProgress, { passive: true });
+  updateProgress();
+
+  // Horizontal pinned project story on desktop; normal stacked cards on smaller screens.
+  const track = document.querySelector(".projects-track");
+  const viewport = document.querySelector(".projects-viewport");
+  const desktop = window.matchMedia("(min-width: 901px)");
+  if (!reduceMotion && window.gsap && window.ScrollTrigger && track && viewport && desktop.matches) {
+    const distance = () => Math.max(0, track.scrollWidth - viewport.clientWidth);
+    if (distance() > 40) {
+      gsap.to(track, {
+        x: () => -distance(),
+        ease: "none",
+        scrollTrigger: {
+          trigger: "#work",
+          start: "top top+=76",
+          end: () => "+=" + distance(),
+          pin: viewport,
+          scrub: 0.8,
+          anticipatePin: 1,
+          invalidateOnRefresh: true
+        }
+      });
+    }
+  }
+
+  // Gentle depth on project cards, not a heavy 3D tilt.
+  if (!reduceMotion && window.gsap && finePointer) {
+    document.querySelectorAll(".project-card").forEach((card) => {
+      card.addEventListener("pointermove", (event) => {
+        const rect = card.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width - 0.5;
+        const y = (event.clientY - rect.top) / rect.height - 0.5;
+        const visual = card.querySelector(".project-visual");
+        if (visual) visual.style.transform = "perspective(900px) rotateX(" + (-y * 1.2) + "deg) rotateY(" + (x * 1.2) + "deg)";
+      });
+      card.addEventListener("pointerleave", () => {
+        const visual = card.querySelector(".project-visual");
+        if (visual) visual.style.transform = "";
+      });
+    });
+  }
+
+  // Magnetic pull for primary actions on precise-pointer devices only.
+  if (!reduceMotion && finePointer) {
+    document.querySelectorAll(".button-primary,.button-light,.nav-cta").forEach((element) => {
+      element.addEventListener("pointermove", (event) => {
+        const rect = element.getBoundingClientRect();
+        const dx = event.clientX - (rect.left + rect.width / 2);
+        const dy = event.clientY - (rect.top + rect.height / 2);
+        element.style.transform = "translate(" + (dx * 0.08) + "px," + (dy * 0.12) + "px)";
+      });
+      element.addEventListener("pointerleave", () => { element.style.transform = ""; });
+    });
+  }
+
+  // Custom cursor is deliberately limited to desktop pointer devices.
+  if (!reduceMotion && finePointer && cursorDot && cursorRing) {
+    let x = innerWidth / 2, y = innerHeight / 2, ringX = x, ringY = y;
+    document.addEventListener("pointermove", (event) => {
+      x = event.clientX; y = event.clientY;
+      cursorDot.style.transform = "translate(" + x + "px," + y + "px) translate(-50%,-50%)";
+      document.body.classList.add("motion-ready");
+    });
+    const follow = () => {
+      ringX += (x - ringX) * 0.16;
+      ringY += (y - ringY) * 0.16;
+      cursorRing.style.transform = "translate(" + ringX + "px," + ringY + "px) translate(-50%,-50%)";
+      requestAnimationFrame(follow);
+    };
+    requestAnimationFrame(follow);
+    document.querySelectorAll("a,button,.gallery-shot").forEach((target) => {
+      target.addEventListener("pointerenter", () => cursorRing.classList.add("is-hover"));
+      target.addEventListener("pointerleave", () => cursorRing.classList.remove("is-hover"));
+    });
+  }
+
+  // Refresh pinned measurements after fonts and images settle.
+  if (window.ScrollTrigger) {
+    window.addEventListener("load", () => ScrollTrigger.refresh(), { once: true });
+    window.addEventListener("resize", () => ScrollTrigger.refresh(), { passive: true });
+  }
+})();
