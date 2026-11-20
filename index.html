@@ -1,627 +1,163 @@
-<!DOCTYPE html>
-<html lang="id" data-theme="light">
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Muhammad Adzikra Putra Zen — Mobile & Web Developer. Business Information Systems student at Politeknik Negeri Malang. Open to internship and freelance opportunities.">
-  <meta name="keywords" content="Muhammad Adzikra, Flutter developer, web developer, portfolio, Politeknik Negeri Malang, POLINEMA">
-  <meta property="og:title" content="Muhammad Adzikra — Portfolio">
-  <meta property="og:description" content="Mobile & Web Developer. Business Information Systems, Politeknik Negeri Malang.">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fbfaf8">
+  <meta name="description" content="Adzikra — Full-stack Software Engineer building practical web applications, backend systems, and digital products.">
+  <meta property="og:title" content="Adzikra — Full-stack Software Engineer">
+  <meta property="og:description" content="Selected software projects, engineering skills, and ways to connect.">
   <meta property="og:type" content="website">
-  <title>Muhammad Adzikra — Portfolio</title>
+  <title>Adzikra — Full-stack Software Engineer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<!-- ══════════════════════════════════
-     NAVIGATION
-══════════════════════════════════ -->
-<nav id="navbar">
-  <div class="nav-inner">
-    <a href="#" class="nav-logo">
-      Adzikra<div class="nav-logo-dot"></div>
-    </a>
-
-    <div class="nav-links">
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </div>
-
-    <div class="nav-right">
-      <div class="avail-badge">
-        <span class="avail-dot"></span>
-        Open to work
+  <header class="site-header">
+    <nav class="nav shell" aria-label="Main navigation">
+      <a class="brand" href="#top" aria-label="Adzikra home">adzikra<span>.</span></a>
+      <div class="nav-links">
+        <a href="#work">Projects</a>
+        <a href="#expertise">Expertise</a>
+        <a href="#about">About</a>
       </div>
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle theme">🌙</button>
-    </div>
-  </div>
-</nav>
+      <a class="nav-cta" href="mailto:dzikra.zen@gmail.com">Let's talk <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
 
-<!-- ══════════════════════════════════
-     HERO
-══════════════════════════════════ -->
-<div class="container">
-  <section class="hero">
-    <div class="hero-eyebrow">✦ Open to Internship & Freelance Opportunities</div>
-
-    <h1 class="hero-h1">
-      Hi, I'm<br>
-      <span class="gradient-text">Muhammad Adzikra</span> 👋
-    </h1>
-
-    <p class="hero-desc">
-      A Business Information Systems student at Politeknik Negeri Malang
-      with a passion for building clean, purposeful software. I develop
-      cross-platform mobile apps and web solutions — driven by the belief
-      that technology should solve real problems and create genuine value.
-    </p>
-
-    <div class="hero-actions">
-      <a href="https://github.com/adzikraaa" class="btn btn-primary" target="_blank" rel="noopener">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-        GitHub
-      </a>
-      <a href="https://www.linkedin.com/in/muhammad-adzikra-46746934b/" class="btn btn-ghost" target="_blank" rel="noopener">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-        LinkedIn
-      </a>
-      <a href="mailto:dzikra.zen@gmail.com" class="btn btn-ghost">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-        Email
-      </a>
-    </div>
-
-    <!-- Stats -->
-    <div class="hero-stats">
-      <div class="stat-item">
-        <span class="stat-value" data-count="3">3+</span>
-        <span class="stat-label">Projects shipped</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-value" data-count="2">2</span>
-        <span class="stat-label">Tech stacks</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-value">2025</span>
-        <span class="stat-label">Coding since</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-value">4th</span>
-        <span class="stat-label">Semester · POLINEMA</span>
-      </div>
-    </div>
-  </section>
-</div>
-
-<!-- ══════════════════════════════════
-     PROJECTS
-══════════════════════════════════ -->
-<div class="container">
-  <section class="section reveal" id="projects">
-    <div class="section-header">
-      <div class="section-title-group">
-        <div class="section-label">Work</div>
-        <h2 class="section-title">Projects</h2>
-      </div>
-      <a href="https://github.com/adzikraaa" class="section-action" target="_blank" rel="noopener">
-        View all
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
-      </a>
-    </div>
-
-    <div class="projects-stack reveal-stagger">
-
-      <!-- ── PROJECT 1: BizPrice App ── -->
-      <article class="project-card" id="project-bizprice">
-        <div class="project-num">01</div>
-
-        <!-- Mockup area -->
-        <div class="card-media">
-          <div class="card-media-gradient">
-            <svg viewBox="0 0 620 430" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:580px;display:block;margin:0 auto" role="img" aria-label="BizPrice app screenshots in iPhone mockup">
-              <defs>
-                <clipPath id="sc1"><rect x="55" y="32" width="158" height="344" rx="24"/></clipPath>
-                <clipPath id="sc2"><rect x="248" y="32" width="158" height="344" rx="24"/></clipPath>
-                <linearGradient id="bodyG1" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0%" stop-color="#A8A8A8"/><stop offset="6%" stop-color="#E2E2E2"/>
-                  <stop offset="94%" stop-color="#E2E2E2"/><stop offset="100%" stop-color="#A8A8A8"/>
-                </linearGradient>
-                <linearGradient id="bodyG2" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0%" stop-color="#A8A8A8"/><stop offset="6%" stop-color="#E2E2E2"/>
-                  <stop offset="94%" stop-color="#E2E2E2"/><stop offset="100%" stop-color="#A8A8A8"/>
-                </linearGradient>
-                <linearGradient id="bezelG" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#1c1c1e"/><stop offset="100%" stop-color="#0a0a0a"/>
-                </linearGradient>
-                <linearGradient id="glossG" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#fff" stop-opacity="0.10"/>
-                  <stop offset="60%" stop-color="#fff" stop-opacity="0"/>
-                </linearGradient>
-                <linearGradient id="btnG" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0%" stop-color="#B0B0B0"/><stop offset="50%" stop-color="#D8D8D8"/>
-                  <stop offset="100%" stop-color="#A8A8A8"/>
-                </linearGradient>
-                <filter id="ph-shadow" x="-25%" y="-10%" width="150%" height="130%">
-                  <feDropShadow dx="0" dy="10" stdDeviation="18" flood-color="#000" flood-opacity="0.20"/>
-                </filter>
-              </defs>
-              <!-- Phone Left -->
-              <g filter="url(#ph-shadow)">
-                <rect x="45" y="16" width="178" height="376" rx="36" fill="url(#bodyG1)"/>
-                <rect x="50" y="21" width="168" height="366" rx="32" fill="url(#bezelG)"/>
-                <image href="assets/Home.png" x="55" y="32" width="158" height="344" clip-path="url(#sc1)" preserveAspectRatio="xMidYMin slice"/>
-                <rect x="55" y="32" width="158" height="344" rx="24" fill="url(#glossG)"/>
-                <rect x="103" y="43" width="62" height="14" rx="7" fill="#000" opacity="0.95"/>
-                <circle cx="152" cy="50" r="3.5" fill="#111"/>
-                <circle cx="152" cy="50" r="1.8" fill="#0a0a0a"/>
-                <rect x="111" y="364" width="46" height="4" rx="2" fill="#fff" opacity="0.25"/>
-                <rect x="42" y="80"  width="5" height="26" rx="2.5" fill="url(#btnG)"/>
-                <rect x="42" y="114" width="5" height="38" rx="2.5" fill="url(#btnG)"/>
-                <rect x="42" y="160" width="5" height="38" rx="2.5" fill="url(#btnG)"/>
-                <rect x="42" y="56"  width="5" height="16" rx="2.5" fill="url(#btnG)"/>
-                <rect x="222" y="112" width="5" height="58" rx="2.5" fill="url(#btnG)"/>
-                <rect x="55" y="32" width="158" height="344" rx="24" fill="none" stroke="#fff" stroke-width="0.5" opacity="0.10"/>
-              </g>
-              <text x="134" y="410" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#6B7280" font-weight="500">Home</text>
-
-              <!-- Phone Right -->
-              <g filter="url(#ph-shadow)">
-                <rect x="238" y="16" width="178" height="376" rx="36" fill="url(#bodyG2)"/>
-                <rect x="243" y="21" width="168" height="366" rx="32" fill="url(#bezelG)"/>
-                <image href="assets/Hasil_Analisis.png" x="248" y="32" width="158" height="344" clip-path="url(#sc2)" preserveAspectRatio="xMidYMin slice"/>
-                <rect x="248" y="32" width="158" height="344" rx="24" fill="url(#glossG)"/>
-                <rect x="296" y="43" width="62" height="14" rx="7" fill="#000" opacity="0.95"/>
-                <circle cx="345" cy="50" r="3.5" fill="#111"/>
-                <circle cx="345" cy="50" r="1.8" fill="#0a0a0a"/>
-                <rect x="304" y="364" width="46" height="4" rx="2" fill="#fff" opacity="0.25"/>
-                <rect x="235" y="80"  width="5" height="26" rx="2.5" fill="url(#btnG)"/>
-                <rect x="235" y="114" width="5" height="38" rx="2.5" fill="url(#btnG)"/>
-                <rect x="235" y="160" width="5" height="38" rx="2.5" fill="url(#btnG)"/>
-                <rect x="235" y="56"  width="5" height="16" rx="2.5" fill="url(#btnG)"/>
-                <rect x="415" y="112" width="5" height="58" rx="2.5" fill="url(#btnG)"/>
-                <rect x="248" y="32" width="158" height="344" rx="24" fill="none" stroke="#fff" stroke-width="0.5" opacity="0.10"/>
-              </g>
-              <text x="327" y="410" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#6B7280" font-weight="500">Hasil Analisis</text>
-
-              <!-- Feature Badges -->
-              <rect x="440" y="68"  width="148" height="34" rx="10" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1"/>
-              <text x="514" y="81"  text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#1D4ED8" font-weight="600">💰 Kalkulator HPP</text>
-              <text x="514" y="95"  text-anchor="middle" font-family="Inter,sans-serif" font-size="9"  fill="#3B82F6">&amp; BEP Otomatis</text>
-              <rect x="440" y="114" width="148" height="34" rx="10" fill="#F0FDF4" stroke="#BBF7D0" stroke-width="1"/>
-              <text x="514" y="127" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#166534" font-weight="600">🎯 Target Tabungan</text>
-              <text x="514" y="141" text-anchor="middle" font-family="Inter,sans-serif" font-size="9"  fill="#16A34A">dengan progress tracker</text>
-              <rect x="440" y="160" width="148" height="34" rx="10" fill="#FFF7ED" stroke="#FED7AA" stroke-width="1"/>
-              <text x="514" y="173" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#C2410C" font-weight="600">📊 Insight Bisnis</text>
-              <text x="514" y="187" text-anchor="middle" font-family="Inter,sans-serif" font-size="9"  fill="#EA580C">analisis visual realtime</text>
-              <rect x="440" y="206" width="148" height="34" rx="10" fill="#FAF5FF" stroke="#E9D5FF" stroke-width="1"/>
-              <text x="514" y="219" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#7E22CE" font-weight="600">🎮 Simulasi Harga</text>
-              <text x="514" y="233" text-anchor="middle" font-family="Inter,sans-serif" font-size="9"  fill="#9333EA">slider interaktif</text>
-              <!-- Connector lines -->
-              <line x1="420" y1="85"  x2="438" y2="85"  stroke="#BFDBFE" stroke-width="1"/>
-              <line x1="420" y1="131" x2="438" y2="131" stroke="#BBF7D0" stroke-width="1"/>
-              <line x1="420" y1="177" x2="438" y2="177" stroke="#FED7AA" stroke-width="1"/>
-              <line x1="420" y1="223" x2="438" y2="223" stroke="#E9D5FF" stroke-width="1"/>
-              <circle cx="438" cy="85"  r="3" fill="#BFDBFE"/>
-              <circle cx="438" cy="131" r="3" fill="#BBF7D0"/>
-              <circle cx="438" cy="177" r="3" fill="#FED7AA"/>
-              <circle cx="438" cy="223" r="3" fill="#E9D5FF"/>
-              <!-- Tech pills -->
-              <rect x="440" y="290" width="54"  height="22" rx="11" fill="#E0F2FE"/>
-              <text x="467" y="305" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#0369A1" font-weight="600">Flutter</text>
-              <rect x="500" y="290" width="42"  height="22" rx="11" fill="#E0F2FE"/>
-              <text x="521" y="305" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#0369A1" font-weight="600">Dart</text>
-              <rect x="440" y="318" width="102" height="22" rx="11" fill="#F3F4F6"/>
-              <text x="491" y="333" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#374151" font-weight="500">Cross-platform</text>
-            </svg>
-          </div>
+  <main id="top">
+    <section class="hero shell">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="status-dot"></span> FULL-STACK SOFTWARE ENGINEER <span class="eyebrow-divider">/</span> MALANG, INDONESIA</p>
+        <h1>Building software<br>that solves <em>real problems.</em></h1>
+        <p class="hero-lead">I build practical web applications and backend systems — connecting thoughtful interfaces, reliable logic, and well-structured data.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#work">Explore projects <span aria-hidden="true">→</span></a>
+          <a class="text-link" href="https://github.com/adzikraaa" target="_blank" rel="noreferrer">GitHub profile <span aria-hidden="true">↗</span></a>
         </div>
+        <div class="hero-note"><span class="note-line"></span><span>Business Information Systems · POLINEMA · Class of 2024</span></div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="art-orbit orbit-one"></div>
+        <div class="art-orbit orbit-two"></div>
+        <div class="art-window window-back"><div class="window-bar"><i></i><i></i><i></i></div><div class="window-lines"><b></b><b></b><b></b></div></div>
+        <div class="art-window window-front">
+          <div class="window-bar"><i></i><i></i><i></i><span>application.ts</span></div>
+          <div class="code-lines"><span><b>01</b> <i>const</i> product = {</span><span><b>02</b> &nbsp; reliable: <strong>true</strong>,</span><span><b>03</b> &nbsp; scalable: <strong>true</strong>,</span><span><b>04</b> &nbsp; userFocused: <strong>true</strong></span><span><b>05</b> };</span></div>
+        </div>
+        <div class="art-database"><span></span><span></span><span></span></div>
+        <div class="art-chip chip-api">REST API</div>
+        <div class="art-chip chip-cloud">DEPLOYED <b>↗</b></div>
+        <div class="art-cross">✳</div>
+      </div>
+    </section>
 
-        <div class="card-body">
-          <div class="card-header">
-            <h3 class="card-title">BizPrice — Finance Tracker App</h3>
-            <div class="card-links">
-              <a href="https://github.com/adzikraaa/PBL-FinanceTracker-Kelompok4" class="card-link" target="_blank" rel="noopener">↗ GitHub</a>
+    <section class="stack-strip shell" aria-label="Technologies">
+      <span class="strip-label">WORKING WITH</span>
+      <span>Laravel</span><i></i><span>PHP</span><i></i><span>JavaScript</span><i></i><span>MySQL</span><i></i><span>PostgreSQL</span><i></i><span>REST API</span><i></i><span>Git &amp; GitHub</span><i></i><span>AWS</span>
+    </section>
+
+    <section class="work-section section shell" id="work">
+      <div class="section-heading">
+        <div><p class="eyebrow section-kicker">SELECTED WORK <span>/ 01—04</span></p><h2>Projects with purpose.</h2></div>
+        <p class="section-intro">A selection of systems and products I have contributed to or built independently.</p>
+      </div>
+
+      <div class="project-grid">
+        <article class="project-card project-featured">
+          <a class="project-visual visual-simpbl" href="https://github.com/adzikraaa/sistemmonitoringpbl" target="_blank" rel="noreferrer" aria-label="Open SIM-PBL repository">
+            <div class="visual-top"><span class="visual-brand"><b class="mini-mark">S</b> SIM-PBL</span><span class="visual-label">PROJECT MONITORING</span></div>
+            <div class="mini-dashboard">
+              <aside><b></b><i></i><i></i><i></i><i></i></aside>
+              <div class="mini-main"><div class="mini-title"></div><div class="mini-metrics"><i></i><i></i><i></i></div><div class="mini-chart"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
             </div>
+            <span class="visual-index">01</span>
+          </a>
+          <div class="project-info">
+            <div class="project-title-row"><div><p class="project-type">FULL-STACK WEB APPLICATION</p><h3>SIM-PBL</h3></div><a class="arrow-link" href="https://github.com/adzikraaa/sistemmonitoringpbl" target="_blank" rel="noreferrer" aria-label="SIM-PBL GitHub repository">↗</a></div>
+            <p>A project-based learning monitoring platform for tracking proposals, milestones, logbooks, and project progress across student and lecturer workflows.</p>
+            <p class="contribution"><b>My contribution</b> Deployment to AWS EC2, GitHub Actions deployment workflow, environment configuration, and testing coordination.</p>
+            <div class="tag-list"><span>Laravel</span><span>MySQL</span><span>AWS EC2</span><span>GitHub Actions</span><span>Dusk / Cypress / Playwright</span></div>
           </div>
-          <p class="card-desc">A cross-platform mobile app designed for Indonesian SMEs — calculates cost of goods, break-even points, and manages business finances. Built collaboratively using a structured Git branching workflow.</p>
-          <div class="tags">
-            <span class="tag tag-flutter">Flutter</span>
-            <span class="tag tag-dart">Dart</span>
-            <span class="tag tag-d">Cross-platform</span>
-            <span class="tag tag-d">Git Collaboration</span>
-            <span class="tag tag-d">PBL Semester 4</span>
+        </article>
+
+        <article class="project-card">
+          <a class="project-visual visual-flagloop" href="https://github.com/adzikraaa/flagloop" target="_blank" rel="noreferrer" aria-label="Open FlagLoop repository">
+            <div class="visual-top"><span class="visual-brand"><b class="mini-mark">F</b> FlagLoop</span><span class="visual-label">FEATURE MANAGEMENT</span></div>
+            <div class="flag-panel"><div class="flag-panel-head"><b>Feature flags</b><span>+ New flag</span></div><div class="flag-row"><i></i><span><b>new-dashboard</b><small>Gradual rollout</small></span><em class="switch on"></em></div><div class="flag-row"><i></i><span><b>beta-feature</b><small>Internal users</small></span><em class="switch on"></em></div><div class="flag-row"><i></i><span><b>pricing-update</b><small>Targeted release</small></span><em class="switch"></em></div></div>
+            <span class="visual-index">02</span>
+          </a>
+          <div class="project-info">
+            <div class="project-title-row"><div><p class="project-type">BACKEND ENGINEERING · PERSONAL PROJECT</p><h3>FlagLoop</h3></div><a class="arrow-link" href="https://github.com/adzikraaa/flagloop" target="_blank" rel="noreferrer" aria-label="FlagLoop GitHub repository">↗</a></div>
+            <p>A feature flag management tool with percentage rollouts, user targeting, audit logs, and an API for evaluating flags.</p>
+            <p class="contribution"><b>Project context</b> Independent portfolio project built around a simulated client brief.</p>
+            <div class="tag-list"><span>Laravel 11</span><span>PostgreSQL</span><span>Redis</span><span>Livewire</span><span>REST API</span></div>
           </div>
-        </div>
-      </article>
+        </article>
 
-      <!-- ── PROJECT 2: Lab SE Website ── -->
-      <article class="project-card" id="project-labse">
-        <div class="project-num">02</div>
-
-        <div class="card-media">
-          <div class="card-gallery">
-            <div class="gallery-item">
-              <div class="browser-frame">
-                <div class="browser-chrome">
-                  <span class="b-dot" style="background:#FF5F57"></span>
-                  <span class="b-dot" style="background:#FFBD2E"></span>
-                  <span class="b-dot" style="background:#28C840"></span>
-                  <span class="browser-url-bar">lab-se.polinema.ac.id</span>
-                </div>
-                <div class="browser-screen">
-                  <img src="assets/landingpage.png" alt="Lab SE landing page" loading="lazy">
-                </div>
-              </div>
-              <span class="gallery-label">Landing Page</span>
-            </div>
-            <div class="gallery-item">
-              <div class="browser-frame">
-                <div class="browser-chrome">
-                  <span class="b-dot" style="background:#FF5F57"></span>
-                  <span class="b-dot" style="background:#FFBD2E"></span>
-                  <span class="b-dot" style="background:#28C840"></span>
-                  <span class="browser-url-bar">lab-se.polinema.ac.id/admin</span>
-                </div>
-                <div class="browser-screen">
-                  <img src="assets/Dashboard_admin.png" alt="Dashboard admin Lab SE" loading="lazy">
-                </div>
-              </div>
-              <span class="gallery-label">Dashboard Admin</span>
-            </div>
+        <article class="project-card">
+          <a class="project-visual visual-pos" href="https://github.com/adzikraaa/simple-pos-kelompok-02" target="_blank" rel="noreferrer" aria-label="Open Simple POS repository">
+            <div class="visual-top"><span class="visual-brand"><b class="mini-mark">P</b> Simple POS</span><span class="visual-label">POINT OF SALE</span></div>
+            <div class="pos-panel"><div class="pos-side"><b></b><i></i><i></i><i></i><i></i></div><div class="pos-content"><b>Sales overview</b><div class="pos-stats"><i></i><i></i><i></i></div><div class="pos-chart"><span></span><span></span><span></span><span></span><span></span><span></span></div></div></div>
+            <span class="visual-index">03</span>
+          </a>
+          <div class="project-info">
+            <div class="project-title-row"><div><p class="project-type">BUSINESS APPLICATION · TEAM PROJECT</p><h3>Simple POS</h3></div><a class="arrow-link" href="https://github.com/adzikraaa/simple-pos-kelompok-02" target="_blank" rel="noreferrer" aria-label="Simple POS GitHub repository">↗</a></div>
+            <p>A point-of-sale application for managing products, categories, transactions, and sales reports, with a versioned REST API.</p>
+            <p class="contribution"><b>My contribution</b> API v1 endpoints, Sanctum-based API workflow, API demo scenarios, and OpenAPI documentation.</p>
+            <div class="tag-list"><span>Laravel</span><span>MySQL</span><span>REST API</span><span>Sanctum</span><span>OpenAPI</span></div>
           </div>
-        </div>
+        </article>
 
-        <div class="card-body">
-          <div class="card-header">
-            <h3 class="card-title">Website Lab Software Engineering</h3>
-            <div class="card-links">
-              <a href="https://github.com/NaufalAlifAdjani/PBL-SE" class="card-link" target="_blank" rel="noopener">↗ GitHub</a>
-            </div>
+        <article class="project-card">
+          <a class="project-visual visual-bizprice" href="https://github.com/adzikraaa/PBL-FinanceTracker-Kelompok4" target="_blank" rel="noreferrer" aria-label="Open BizPrice repository">
+            <div class="visual-top"><span class="visual-brand"><b class="mini-mark">B</b> BizPrice</span><span class="visual-label">MOBILE · BUSINESS FINANCE</span></div>
+            <div class="biz-phone"><div class="phone-notch"></div><b>Business overview</b><div class="biz-balance">Rp 4.850.000<small>Estimated business value</small></div><div class="biz-bars"><i></i><i></i><i></i><i></i></div><div class="biz-bottom"><i></i><i></i><i></i></div></div>
+            <span class="visual-index">04</span>
+          </a>
+          <div class="project-info">
+            <div class="project-title-row"><div><p class="project-type">CROSS-PLATFORM MOBILE · TEAM PROJECT</p><h3>BizPrice</h3></div><a class="arrow-link" href="https://github.com/adzikraaa/PBL-FinanceTracker-Kelompok4" target="_blank" rel="noreferrer" aria-label="BizPrice GitHub repository">↗</a></div>
+            <p>A mobile application that helps small businesses calculate cost of goods sold, break-even points, and track business finances.</p>
+            <p class="contribution"><b>My contribution</b> Development and merge lead, coordinating feature integration across the team.</p>
+            <div class="tag-list"><span>Flutter</span><span>Dart</span><span>Git</span><span>Team collaboration</span></div>
           </div>
-          <p class="card-desc">A profile website for the Software Engineering Laboratory at POLINEMA, built on an MVC architecture. Includes a blog, portfolio showcase, personnel profiles, recruitment module, and a full-featured admin panel.</p>
-          <div class="tags">
-            <span class="tag tag-php">PHP</span>
-            <span class="tag tag-css">CSS</span>
-            <span class="tag tag-js">JavaScript</span>
-            <span class="tag tag-d">MVC</span>
-            <span class="tag tag-d">MySQL</span>
-          </div>
-        </div>
-      </article>
-
-      <!-- ── PROJECT 3: BizPrice Landing Page ── -->
-      <article class="project-card" id="project-landing">
-        <div class="project-num">03</div>
-        <div class="card-simple">
-          <div class="simple-preview">
-            <div class="project-icon-box">🌐</div>
-            <div class="project-icon-text">
-              <div class="title">BizPrice Landing Page</div>
-              <div class="sub">Dark green theme · Particle canvas · Scroll reveal · Responsive</div>
-            </div>
-            <div class="card-links" style="margin-left:auto; flex-shrink:0;">
-              <a href="https://github.com/adzikraaa/weblandingpagePBL-Flutter" class="card-link" target="_blank" rel="noopener">↗ GitHub</a>
-            </div>
-          </div>
-          <p class="card-desc">A promotional landing page for the BizPrice app featuring particle canvas animations, scroll reveal effects, and glassmorphism design — fully responsive across all screen sizes, built with zero external frameworks.</p>
-          <div class="tags">
-            <span class="tag tag-html">HTML</span>
-            <span class="tag tag-css">CSS</span>
-            <span class="tag tag-js">JavaScript</span>
-            <span class="tag tag-d">Vanilla JS</span>
-            <span class="tag tag-d">Responsive</span>
-          </div>
-        </div>
-      </article>
-
-    </div>
-  </section>
-</div>
-
-<!-- ══════════════════════════════════
-     SKILLS
-══════════════════════════════════ -->
-<div class="container">
-  <section class="section reveal" id="skills">
-    <div class="section-header">
-      <div class="section-title-group">
-        <div class="section-label">Expertise</div>
-        <h2 class="section-title">Skills</h2>
+        </article>
       </div>
-    </div>
+      <p class="project-footnote">Project previews are illustrative layouts for this portfolio. Product screenshots and detailed case studies will be added after visual and contribution review.</p>
+    </section>
 
-    <div class="skills-grid reveal-stagger">
-      <div class="skill-card">
-        <span class="skill-icon">🖥️</span>
-        <div class="skill-cat">Frontend</div>
-        <div class="skill-tags">
-          <span class="tag tag-html">HTML5</span>
-          <span class="tag tag-css">CSS3</span>
-          <span class="tag tag-js">JavaScript</span>
-          <span class="tag tag-d">Responsive</span>
+    <section class="expertise-section section" id="expertise">
+      <div class="shell">
+        <div class="section-heading">
+          <div><p class="eyebrow section-kicker">CAPABILITIES <span>/ 02</span></p><h2>Engineering, end to end.</h2></div>
+          <p class="section-intro">The tools and practices I use to move from a problem statement to a working application.</p>
+        </div>
+        <div class="expertise-grid">
+          <article><span class="expertise-number">01</span><div class="expertise-icon">⌘</div><h3>Frontend</h3><p>Building responsive interfaces with semantic HTML, CSS, JavaScript, and component-based UI patterns.</p><div class="expertise-tags">HTML · CSS · JavaScript</div></article>
+          <article><span class="expertise-number">02</span><div class="expertise-icon">⌘</div><h3>Backend &amp; APIs</h3><p>Developing application logic, authentication, business workflows, and RESTful API integrations.</p><div class="expertise-tags">PHP · Laravel · REST API</div></article>
+          <article><span class="expertise-number">03</span><div class="expertise-icon">⌘</div><h3>Database</h3><p>Working with relational data models, schema migrations, queries, and application data flows.</p><div class="expertise-tags">MySQL · PostgreSQL</div></article>
+          <article><span class="expertise-number">04</span><div class="expertise-icon">⌘</div><h3>Testing &amp; Quality</h3><p>Validating application behavior with browser automation and structured test scenarios.</p><div class="expertise-tags">Dusk · Cypress · Playwright</div></article>
+          <article><span class="expertise-number">05</span><div class="expertise-icon">⌘</div><h3>Deployment</h3><p>Deploying web applications to cloud infrastructure and automating delivery workflows.</p><div class="expertise-tags">AWS EC2 · GitHub Actions</div></article>
+          <article><span class="expertise-number">06</span><div class="expertise-icon">⌘</div><h3>Collaboration</h3><p>Using version control, branches, pull requests, and clear technical documentation to work with a team.</p><div class="expertise-tags">Git · GitHub · OpenAPI</div></article>
         </div>
       </div>
-      <div class="skill-card">
-        <span class="skill-icon">📱</span>
-        <div class="skill-cat">Mobile</div>
-        <div class="skill-tags">
-          <span class="tag tag-flutter">Flutter</span>
-          <span class="tag tag-dart">Dart</span>
-          <span class="tag tag-d">Cross-platform</span>
-        </div>
-      </div>
-      <div class="skill-card">
-        <span class="skill-icon">⚙️</span>
-        <div class="skill-cat">Backend &amp; DB</div>
-        <div class="skill-tags">
-          <span class="tag tag-php">PHP</span>
-          <span class="tag tag-d">MySQL</span>
-          <span class="tag tag-d">PostgreSQL</span>
-          <span class="tag tag-d">MVC</span>
-        </div>
-      </div>
-      <div class="skill-card">
-        <span class="skill-icon">🛠️</span>
-        <div class="skill-cat">Tools</div>
-        <div class="skill-tags">
-          <span class="tag tag-d">Git</span>
-          <span class="tag tag-d">GitHub</span>
-          <span class="tag tag-d">Figma</span>
-          <span class="tag tag-d">VS Code</span>
-        </div>
-      </div>
-      <div class="skill-card">
-        <span class="skill-icon">📊</span>
-        <div class="skill-cat">Data</div>
-        <div class="skill-tags">
-          <span class="tag tag-d">Pentaho Spoon</span>
-          <span class="tag tag-d">ETL</span>
-          <span class="tag tag-d">Data Warehouse</span>
-        </div>
-      </div>
-      <div class="skill-card">
-        <span class="skill-icon">🤝</span>
-        <div class="skill-cat">Soft Skills</div>
-        <div class="skill-tags">
-          <span class="tag tag-d">Teamwork</span>
-          <span class="tag tag-d">Communication</span>
-          <span class="tag tag-d">Content Creation</span>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
+    </section>
 
-<!-- ══════════════════════════════════
-     ABOUT
-══════════════════════════════════ -->
-<div class="container">
-  <section class="section reveal" id="about">
-    <div class="section-header">
-      <div class="section-title-group">
-        <div class="section-label">Background</div>
-        <h2 class="section-title">About Me</h2>
-      </div>
-    </div>
+    <section class="about-section section shell" id="about">
+      <div class="about-label"><p class="eyebrow section-kicker">A LITTLE ABOUT ME <span>/ 03</span></p><h2>Curious by nature.<br><em>Engineer by practice.</em></h2></div>
+      <div class="about-copy"><p>I'm Adzikra, a Business Information Systems student at Politeknik Negeri Malang. I enjoy understanding how a product works beneath the interface — from data structure and backend logic to the details that make an application dependable.</p><p>Most of my experience comes from building academic team projects and independent software projects. I value clear problem-solving, maintainable code, collaboration, and learning through shipping real features.</p><div class="about-meta"><span>EDUCATION <b>D-IV Business Information Systems</b></span><span>BASED IN <b>Malang, Indonesia</b></span><span>FOCUS <b>Full-stack Development</b></span></div></div>
+    </section>
 
-    <div class="about-card">
-      <p>
-        I'm Adzikra — a Business Information Systems student at Politeknik Negeri Malang
-        (Class of 2024), focused on building software that is both functional and meaningful.
-        I work across the full development cycle: from designing intuitive interfaces to
-        implementing backend logic, with hands-on experience in Flutter, PHP, and JavaScript.
-        <br><br>
-        I believe that great technology doesn't just work — it creates impact. That mindset
-        pushes me to approach every project with both technical rigor and user empathy.
-        Outside of engineering, I bring strong organizational experience — having served as
-        Secretary of OSIS and ALBAMA — which has sharpened my communication, leadership,
-        and collaborative skills. I'm actively seeking internship or freelance opportunities
-        where I can grow, contribute, and deliver real value.
-      </p>
-    </div>
+    <section class="contact-section shell" id="contact">
+      <p class="eyebrow">HAVE A PROJECT IN MIND?</p>
+      <h2>Let's build something<br><em>useful together.</em></h2>
+      <div class="contact-bottom"><a class="button button-light" href="mailto:dzikra.zen@gmail.com">Get in touch <span aria-hidden="true">↗</span></a><div class="social-links"><a href="https://github.com/adzikraaa" target="_blank" rel="noreferrer">GitHub ↗</a><a href="https://www.linkedin.com/in/muhammad-adzikra-46746934b/" target="_blank" rel="noreferrer">LinkedIn ↗</a></div></div>
+    </section>
+  </main>
 
-    <div class="about-meta reveal-stagger">
-      <div class="meta-item">
-        <span class="meta-emoji">🎓</span>
-        <div>
-          <div class="meta-key">Education</div>
-          <div class="meta-val">D4 Business Information Systems</div>
-        </div>
-      </div>
-      <div class="meta-item">
-        <span class="meta-emoji">🏫</span>
-        <div>
-          <div class="meta-key">University</div>
-          <div class="meta-val">Politeknik Negeri Malang</div>
-        </div>
-      </div>
-      <div class="meta-item">
-        <span class="meta-emoji">📍</span>
-        <div>
-          <div class="meta-key">Location</div>
-          <div class="meta-val">Malang, East Java</div>
-        </div>
-      </div>
-      <div class="meta-item">
-        <span class="meta-emoji">💼</span>
-        <div>
-          <div class="meta-key">Status</div>
-          <div class="meta-val">Open to Opportunities</div>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
-
-<!-- ══════════════════════════════════
-     CONTACT
-══════════════════════════════════ -->
-<div class="container">
-  <section class="section reveal" id="contact">
-    <div class="section-header">
-      <div class="section-title-group">
-        <div class="section-label">Let's connect</div>
-        <h2 class="section-title">Get in touch</h2>
-      </div>
-    </div>
-
-    <div class="contact-intro">
-      <p>Have an interesting project or just want to connect? I'm always open to collaborations, internships, or a conversation about tech and product. Don't hesitate to reach out — I'd love to hear from you. 🙌</p>
-    </div>
-
-    <div class="contact-cards reveal-stagger">
-      <a href="mailto:dzikra.zen@gmail.com" class="contact-card">
-        <div class="contact-icon-box">✉️</div>
-        <div>
-          <div class="contact-lbl">Email</div>
-          <div class="contact-val">dzikra.zen@gmail.com</div>
-        </div>
-      </a>
-      <a href="https://wa.me/6285648967475" class="contact-card" target="_blank" rel="noopener">
-        <div class="contact-icon-box">📞</div>
-        <div>
-          <div class="contact-lbl">WhatsApp</div>
-          <div class="contact-val">085648967475</div>
-        </div>
-      </a>
-      <a href="https://github.com/adzikraaa" class="contact-card" target="_blank" rel="noopener">
-        <div class="contact-icon-box">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-        </div>
-        <div>
-          <div class="contact-lbl">GitHub</div>
-          <div class="contact-val">github.com/adzikraaa</div>
-        </div>
-      </a>
-      <a href="https://www.linkedin.com/in/muhammad-adzikra-46746934b/" class="contact-card" target="_blank" rel="noopener">
-        <div class="contact-icon-box">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-        </div>
-        <div>
-          <div class="contact-lbl">LinkedIn</div>
-          <div class="contact-val">muhammad-adzikra</div>
-        </div>
-      </a>
-    </div>
-  </section>
-</div>
-
-<!-- ══════════════════════════════════
-     FOOTER
-══════════════════════════════════ -->
-<footer>
-  <div class="footer-inner">
-    <p class="footer-copy">© 2026 Muhammad Adzikra Putra Zen · Crafted with passion & curiosity 🙏</p>
-    <div class="footer-links">
-      <a href="https://github.com/adzikraaa" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://www.linkedin.com/in/muhammad-adzikra-46746934b/" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="mailto:dzikra.zen@gmail.com">Email</a>
-    </div>
-  </div>
-</footer>
-
-<!-- ══════════════════════════════════
-     JAVASCRIPT
-══════════════════════════════════ -->
-<script>
-  /* ── THEME TOGGLE ── */
-  const html    = document.documentElement;
-  const toggle  = document.getElementById('themeToggle');
-  const STORAGE = 'portfolio-theme';
-
-  function applyTheme(theme) {
-    html.setAttribute('data-theme', theme);
-    toggle.textContent = theme === 'dark' ? '☀️' : '🌙';
-    localStorage.setItem(STORAGE, theme);
-  }
-
-  // Init from storage or system
-  const saved  = localStorage.getItem(STORAGE);
-  const system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  applyTheme(saved || system);
-
-  toggle.addEventListener('click', () => {
-    applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
-  });
-
-  /* ── SCROLL REVEAL ── */
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-
-  document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => observer.observe(el));
-
-  /* ── ACTIVE NAV LINK ── */
-  const sections  = document.querySelectorAll('section[id]');
-  const navAnchors = document.querySelectorAll('.nav-links a');
-
-  const sectionObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = entry.target.id;
-        navAnchors.forEach(a => {
-          a.style.background = a.getAttribute('href') === '#' + id
-            ? 'var(--card)'
-            : '';
-          a.style.color = a.getAttribute('href') === '#' + id
-            ? 'var(--text)'
-            : '';
-          a.style.boxShadow = a.getAttribute('href') === '#' + id
-            ? 'var(--shadow-sm)'
-            : '';
-        });
-      }
-    });
-  }, { threshold: 0.35 });
-
-  sections.forEach(s => sectionObserver.observe(s));
-
-  /* ── SMOOTH NAV SCROLL ── */
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
-  });
-
-  /* ── STAT COUNTER ANIMATION ── */
-  function animateValue(el, start, end, duration, suffix) {
-    const startTime = performance.now();
-    function update(now) {
-      const elapsed = Math.min((now - startTime) / duration, 1);
-      const ease = 1 - Math.pow(1 - elapsed, 3);
-      el.textContent = Math.floor(start + (end - start) * ease) + suffix;
-      if (elapsed < 1) requestAnimationFrame(update);
-    }
-    requestAnimationFrame(update);
-  }
-
-  const heroObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        animateValue(document.querySelector('[data-count="3"]'), 0, 3, 1200, '+');
-        animateValue(document.querySelector('[data-count="2"]'), 0, 2, 1000, '');
-        heroObserver.disconnect();
-      }
-    });
-  }, { threshold: 0.5 });
-
-  const heroStats = document.querySelector('.hero-stats');
-  if (heroStats) heroObserver.observe(heroStats);
-</script>
-
+  <footer class="site-footer shell"><a class="brand" href="#top">adzikra<span>.</span></a><p>Designed and built with care · © <span id="year"></span> Adzikra</p><a href="#top">Back to top ↑</a></footer>
+  <script src="script.js"></script>
 </body>
 </html>
