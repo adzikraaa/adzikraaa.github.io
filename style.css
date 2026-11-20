@@ -216,3 +216,11 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 @media(max-width:900px){.stack-logos{grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}}
 @media(max-width:640px){.stack-strip{padding:17px 12px}.stack-strip .strip-label{margin-bottom:12px}.stack-logos{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}.stack-item{min-height:70px;font-size:.64rem;gap:7px}.stack-item img{width:27px;height:27px}}
 @media(prefers-reduced-motion:reduce){.stack-item,.stack-item img{transition:none}}
+
+
+/* Refined capability icons */
+.expertise-icon{width:42px;height:42px;border:1px solid #dcd5ef;background:rgba(255,255,255,.72);color:var(--accent);border-radius:11px;display:grid;place-items:center;margin-bottom:24px}
+.expertise-icon svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}
+.expertise-grid article{transition:background .28s,border-color .28s}
+.expertise-grid article:hover{background:rgba(255,255,255,.58)}
+.stack-item img{width:31px;height:31px;object-fit:contain}
