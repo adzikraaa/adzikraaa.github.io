@@ -13,14 +13,48 @@ if ("IntersectionObserver" in window) {
 
 
 // Local portrait and project screenshot fallbacks.
-document.querySelectorAll(".portrait-image, .gallery-shot img").forEach((img) => {
+document.querySelectorAll(".certificate-art img[data-fallbacks]").forEach((img) => {
+  const fallbacks = img.dataset.fallbacks.split("|");
+  img.addEventListener("error", () => {
+    const nextSource = fallbacks.shift();
+    if (nextSource) img.src = nextSource;
+  });
+});
+
+// Prefer an uploaded certificate PDF when it exists; otherwise retain the image preview.
+const certificatePdfPath = "assets/certificates/revou-software-engineering.pdf";
+const certificatePdfViewer = document.querySelector(".certificate-pdf");
+if (certificatePdfViewer) {
+  fetch(certificatePdfPath, { method: "HEAD" }).then((response) => {
+    if (!response.ok) return;
+    certificatePdfViewer.src = certificatePdfPath;
+    certificatePdfViewer.hidden = false;
+    document.querySelector(".certificate-art img")?.setAttribute("hidden", "");
+    document.querySelector(".certificate-placeholder")?.setAttribute("hidden", "");
+    const pdfLink = document.querySelector(".certificate-pdf-link");
+    if (pdfLink) pdfLink.hidden = false;
+  }).catch(() => {});
+}
+
+document.querySelectorAll(".portrait-image, .cinematic-photo img, .gallery-shot img, .certificate-art img, .experience-photo img").forEach((img) => {
   const markLoaded = () => img.classList.add("is-loaded");
   img.addEventListener("load", markLoaded, { once: true });
   if (img.complete && img.naturalWidth > 0) markLoaded();
 });
 
+// Horizontal project screenshot galleries: touch/trackpad scrolling plus arrow controls.
+document.querySelectorAll(".gallery-arrow").forEach((button) => {
+  button.addEventListener("click", () => {
+    const gallery = button.closest(".project-visual")?.querySelector(".project-gallery");
+    if (!gallery) return;
+    const direction = button.classList.contains("gallery-next") ? 1 : -1;
+    const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+    gallery.scrollBy({ left: direction * gallery.clientWidth, behavior });
+  });
+});
+
 // Reveal sections as they enter the viewport; respect reduced-motion preferences.
-const revealTargets = document.querySelectorAll(".project-card, .about-copy, .contact-section");
+const revealTargets = document.querySelectorAll(".about-copy, .contact-section");
 if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches && "IntersectionObserver" in window) {
   revealTargets.forEach((item) => item.classList.add("reveal"));
   const revealObserver = new IntersectionObserver((entries, observer) => {
@@ -35,7 +69,7 @@ if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches && "Intersect
 }
 
 // Read-only public GitHub API: repository metadata for the featured work.
-const featuredRepos = ["sistemmonitoringpbl", "flagloop", "simple-pos-kelompok-02", "PBL-FinanceTracker-Kelompok4"];
+const featuredRepos = ["sistemmonitoringpbl", "flagloop", "PBL-FinanceTracker-Kelompok4"];
 const repoGrid = document.getElementById("repo-grid");
 if (repoGrid) {
   Promise.all(featuredRepos.map(async (name) => {
@@ -69,8 +103,6 @@ if (repoGrid) {
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const finePointer = window.matchMedia("(pointer: fine)").matches;
   const progress = document.querySelector(".scroll-progress span");
-  const cursorDot = document.querySelector(".cursor-dot");
-  const cursorRing = document.querySelector(".cursor-ring");
 
   // Accessible, low-friction smooth scrolling.
   let lenis = null;
@@ -87,30 +119,62 @@ if (repoGrid) {
     }
   }
 
-  // Hero: staggered text entrance and portrait reveal.
-  const heroCopy = document.querySelector("[data-hero-copy]");
-  const heroItems = heroCopy ? [
-    heroCopy.querySelector(".eyebrow"),
-    heroCopy.querySelector(".hero-title"),
-    heroCopy.querySelector(".hero-lead"),
-    heroCopy.querySelector(".hero-actions"),
-    heroCopy.querySelector(".hero-note")
-  ].filter(Boolean) : [];
-  heroItems.forEach((item) => item.setAttribute("data-hero-item", ""));
-  if (!reduceMotion && window.gsap) {
-    const titleLines = gsap.utils.toArray(".hero-line > span");
-    gsap.set(titleLines, { yPercent: 115, rotate: 1.5 });
-    const intro = gsap.timeline({ defaults: { ease: "power4.out" } });
-    intro.to(heroItems, {
-      y: 0, opacity: 1, duration: 0.8, stagger: 0.1
-    }, 0.12);
-    intro.to(titleLines, { yPercent: 0, rotate: 0, duration: 1.05, stagger: 0.13 }, 0.28);
-    gsap.to("[data-hero-portrait]", { opacity: 1, clipPath: "inset(0% 0% 0% 0% round 46% 46% 18px 18px)", duration: 1.25, ease: "power4.inOut", delay: 0.48 });
-  } else {
-    heroItems.forEach((item) => { item.style.opacity = "1"; item.style.transform = "none"; });
-    document.querySelectorAll(".hero-line > span").forEach((line) => { line.style.transform = "none"; });
-    const portrait = document.querySelector("[data-hero-portrait]");
-    if (portrait) { portrait.style.opacity = "1"; portrait.style.clipPath = "none"; }
+  // Scroll-driven cinematic card reveal, followed by the personal introduction.
+  const introSection = document.querySelector(".cinematic-intro");
+  const introStage = document.querySelector("[data-cinematic-stage]");
+  if (!reduceMotion && window.gsap && window.ScrollTrigger && introSection && introStage) {
+    gsap.registerPlugin(ScrollTrigger);
+    const introTitle = document.querySelector("[data-cinematic-title]");
+    const introPhoto = document.querySelector("[data-cinematic-photo]");
+    const introBio = document.querySelector("[data-cinematic-bio]");
+    const introBeam = document.querySelector(".cinematic-beam");
+    const scrollCue = document.querySelector("[data-cinematic-cue]");
+    const header = document.querySelector(".site-header");
+    const reveal = gsap.timeline({
+      scrollTrigger: {
+        trigger: introSection,
+        pin: introStage,
+        start: () => "top top+=" + (header?.offsetHeight || 76),
+        // Keep the profile pinned long enough to read before moving to the stack section.
+        end: () => "+=" + Math.round(window.innerHeight * 2.2),
+        scrub: 0.8,
+        anticipatePin: 1,
+        invalidateOnRefresh: true
+      }
+    });
+    reveal.fromTo(introPhoto, { clipPath: "inset(0 0 100% 0 round 24px)", scale: 1.08 }, { clipPath: "inset(0 0 0% 0 round 24px)", scale: 1, ease: "none", duration: 0.75 }, 0);
+    reveal.fromTo(introBeam, { opacity: 0.12, scaleX: 0.35, rotate: -13 }, { opacity: 0.9, scaleX: 1, rotate: 0, ease: "none", duration: 0.8 }, 0);
+    reveal.to(introTitle, { y: -72, scale: 0.78, opacity: 0.28, transformOrigin: "left top", ease: "none", duration: 0.75 }, 0.12);
+    reveal.fromTo(introBio, { y: 54, opacity: 0 }, { y: 0, opacity: 1, ease: "none", duration: 0.55 }, 0.52);
+    reveal.to(scrollCue, { y: 18, opacity: 0, ease: "none", duration: 0.22 }, 0);
+    // Hold the fully revealed profile briefly before the pinned intro releases.
+    reveal.to(introBio, { y: 0, opacity: 1, ease: "none", duration: 1 });
+  }
+
+  // Reveal the technology icons in their own section, after the profile intro.
+  const stackStrip = document.querySelector(".stack-strip");
+  const stackLogoTrack = document.querySelector(".stack-marquee-track");
+  const originalStackLogos = stackLogoTrack?.querySelector(".stack-logos");
+  if (originalStackLogos && stackLogoTrack.children.length === 1) {
+    const repeatedStackLogos = originalStackLogos.cloneNode(true);
+    repeatedStackLogos.setAttribute("aria-hidden", "true");
+    repeatedStackLogos.querySelectorAll("img").forEach((img) => { img.alt = ""; });
+    stackLogoTrack.append(repeatedStackLogos);
+  }
+  const stackItems = window.gsap && window.ScrollTrigger ? window.gsap.utils.toArray(".stack-logos .stack-item") : [];
+  if (!reduceMotion && window.gsap && window.ScrollTrigger && stackStrip && stackItems.length) {
+    gsap.fromTo(stackItems, { y: 22, autoAlpha: 0 }, {
+      y: 0,
+      autoAlpha: 1,
+      stagger: 0.08,
+      duration: 0.55,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: stackStrip,
+        start: "top 82%",
+        once: true
+      }
+    });
   }
 
   // Scroll progress indicator.
@@ -122,27 +186,41 @@ if (repoGrid) {
   window.addEventListener("scroll", updateProgress, { passive: true });
   updateProgress();
 
-  // Horizontal pinned project story on desktop; normal stacked cards on smaller screens.
-  const track = document.querySelector(".projects-track");
-  const viewport = document.querySelector(".projects-viewport");
-  const desktop = window.matchMedia("(min-width: 901px)");
-  if (!reduceMotion && window.gsap && window.ScrollTrigger && track && viewport && desktop.matches) {
-    const distance = () => Math.max(0, track.scrollWidth - viewport.clientWidth);
-    if (distance() > 40) {
-      gsap.to(track, {
-        x: () => -distance(),
+  // Cinematic horizontal project track on desktop; keep the mobile/reduced-motion layout vertical.
+  const projectTrack = document.querySelector(".projects-track");
+  const projectViewport = document.querySelector(".projects-viewport");
+  const desktopProjects = window.matchMedia("(min-width: 901px)").matches;
+  if (!reduceMotion && desktopProjects && window.gsap && window.ScrollTrigger && projectTrack && projectViewport) {
+    gsap.registerPlugin(ScrollTrigger);
+    const horizontalProjects = gsap.to(projectTrack, {
+      x: () => -Math.max(0, projectTrack.scrollWidth - projectViewport.clientWidth),
+      ease: "none",
+      scrollTrigger: {
+        trigger: "#work",
+        start: "top top+=76",
+        end: () => "+=" + Math.max(0, projectTrack.scrollWidth - projectViewport.clientWidth),
+        pin: projectViewport,
+        scrub: 0.75,
+        anticipatePin: 1,
+        invalidateOnRefresh: true
+      }
+    });
+
+    gsap.utils.toArray(".projects-track .project-card").forEach((card) => {
+      gsap.fromTo(card, { scale: 0.94, filter: "saturate(.72)", boxShadow: "0 8px 20px rgba(14,47,118,.04)" }, {
+        scale: 1,
+        filter: "saturate(1.12)",
+        boxShadow: "0 28px 90px rgba(14,47,118,.2)",
         ease: "none",
         scrollTrigger: {
-          trigger: "#work",
-          start: "top top+=76",
-          end: () => "+=" + distance(),
-          pin: viewport,
-          scrub: 0.8,
-          anticipatePin: 1,
-          invalidateOnRefresh: true
+          trigger: card,
+          containerAnimation: horizontalProjects,
+          start: "left 92%",
+          end: "left 48%",
+          scrub: 0.6
         }
       });
-    }
+    });
   }
 
   // Gentle depth on project cards, not a heavy 3D tilt.
@@ -175,36 +253,6 @@ if (repoGrid) {
     });
   }
 
-  // Custom cursor is deliberately limited to desktop pointer devices.
-  if (!reduceMotion && finePointer && cursorDot && cursorRing) {
-    let x = innerWidth / 2, y = innerHeight / 2, ringX = x, ringY = y;
-    document.addEventListener("pointermove", (event) => {
-      x = event.clientX; y = event.clientY;
-      cursorDot.style.transform = "translate(" + x + "px," + y + "px) translate(-50%,-50%)";
-      document.body.classList.add("motion-ready");
-    });
-    const follow = () => {
-      ringX += (x - ringX) * 0.16;
-      ringY += (y - ringY) * 0.16;
-      cursorRing.style.transform = "translate(" + ringX + "px," + ringY + "px) translate(-50%,-50%)";
-      requestAnimationFrame(follow);
-    };
-    requestAnimationFrame(follow);
-    document.querySelectorAll("a,button,.gallery-shot").forEach((target) => {
-      target.addEventListener("pointerenter", () => {
-        cursorRing.classList.add("is-hover");
-        if (target.closest(".project-card")) {
-          cursorRing.classList.add("is-project");
-          cursorRing.textContent = "VIEW\nPROJECT";
-        }
-      });
-      target.addEventListener("pointerleave", () => {
-        cursorRing.classList.remove("is-hover", "is-project");
-        cursorRing.textContent = "";
-      });
-    });
-  }
-
   // Refresh pinned measurements after fonts and images settle.
   if (window.ScrollTrigger) {
     window.addEventListener("load", () => ScrollTrigger.refresh(), { once: true });
@@ -220,7 +268,7 @@ if (repoGrid) {
   gsap.registerPlugin(ScrollTrigger);
 
   // Stagger cards and capability tiles as cohesive groups.
-  [".expertise-grid", ".repo-grid"].forEach((selector) => {
+  [".expertise-grid", ".experience-list", ".repo-grid"].forEach((selector) => {
     const group = document.querySelector(selector);
     if (!group) return;
     const items = group.children;
